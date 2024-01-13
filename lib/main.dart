@@ -23,7 +23,6 @@ import 'package:ride_sharing_user_app/util/app_constants.dart';
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark, // dark text for status bar
       statusBarColor: Colors.transparent),
