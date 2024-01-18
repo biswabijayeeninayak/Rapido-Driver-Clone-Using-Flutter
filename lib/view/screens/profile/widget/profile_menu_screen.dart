@@ -10,10 +10,14 @@ import 'package:ride_sharing_user_app/view/screens/chat/chat_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/help_and_support/help_and_support_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/leaderboard/leaderboard_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/my_offer/my_offer_screen.dart';
+import 'package:ride_sharing_user_app/view/screens/notification/notification_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/profile/profile_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/profile/widget/profile_level_widget.dart';
+import 'package:ride_sharing_user_app/view/screens/profile/widget/profile_notification.dart';
+import 'package:ride_sharing_user_app/view/screens/profile/widget/profile_triphistory.dart';
 import 'package:ride_sharing_user_app/view/screens/review/review_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/setting/setting_screen.dart';
+import 'package:ride_sharing_user_app/view/screens/trip/trip_screen.dart';
 import 'package:ride_sharing_user_app/view/widgets/confirmation_dialog.dart';
 
 class ProfileMenuScreen extends StatelessWidget {
@@ -28,13 +32,13 @@ class ProfileMenuScreen extends StatelessWidget {
           Column(children:   [
             const ProfileLevelWidget(),
 
-            const SizedBox(height: 50,),
+            const SizedBox(height: 100,),
 
-             ProfileMenuItem(icon: Images.profileIcon, title: 'profile', onTap: ()=> Get.to(()=> const ProfileScreen()),),
-             ProfileMenuItem(icon: Images.myOfferIcon, title: 'my_offer', onTap: ()=> Get.to(()=> const MyOfferScreen()),),
-            ProfileMenuItem(icon: Images.message, title: 'message', onTap: ()=>  Get.to(()=> const ChatScreen())),
-            ProfileMenuItem(icon: Images.destinationIcon, title: 'my_reviews', onTap: ()=> Get.to(()=> const ReviewScreen())),
-            ProfileMenuItem(icon: Images.leaderBoardIcon, title: 'leader_board', onTap: ()=> Get.to(()=> const LeaderboardScreen()),),
+            ProfileMenuItem(icon: Images.profileIcon, title: 'profile', onTap: ()=> Get.to(()=> const ProfileScreen()),),
+            ProfileMenuItem(icon: Images.myOfferIcon, title: 'My Rides', onTap: ()=> Get.to(()=> const ProfileTripHistoryScreen()),),
+            ProfileMenuItem(icon: Images.notificationActive, title: 'Notification', onTap: ()=>  Get.to(()=> const ProfileNotificationScreen())),
+            ProfileMenuItem(icon: Images.destinationIcon, title: 'Ratings', onTap: ()=> Get.to(()=> const ReviewScreen())),
+            // ProfileMenuItem(icon: Images.leaderBoardIcon, title: 'leader_board', onTap: ()=> Get.to(()=> const LeaderboardScreen()),),
             ProfileMenuItem(icon: Images.helpAndSupportIcon, title: 'help_and_support', onTap: ()=> Get.to(()=> const HelpAndSupportScreen()),),
             ProfileMenuItem(icon: Images.setting, title: 'setting', onTap: ()=> Get.to(()=> const SettingScreen()),),
 

@@ -9,7 +9,9 @@ class NotificationController extends GetxController implements GetxService{
   NotificationController({required this.notificationRepo});
 
 
-  List<String> notificationTypeList = ['activity', 'offer', 'news'];
+  // List<String> notificationTypeList = ['activity', 'offer', 'news'];
+  List<String> notificationTypeList = ['activity'];
+
   int _notificationTypeIndex = 0;
   int get notificationTypeIndex => _notificationTypeIndex;
   List<NotificationModel> notificationList = [];

@@ -81,7 +81,7 @@ class SummeryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const Icon(Icons.check_circle,size: Dimensions.iconSizeSmall, color: Colors.green),
+      const Icon(Icons.check_circle,size: Dimensions.iconSizeSmall, color: Colors.red),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeExtraSmall),
         child: Text(title, style: textMedium.copyWith(color: Theme.of(context).primaryColor)),

@@ -18,7 +18,9 @@ class TripController extends GetxController implements GetxService{
    }
 
 
-   List<String> activityTypeList = ['trips', 'over_view'];
+  //  List<String> activityTypeList = ['trips', 'over_view'];
+   List<String> activityTypeList = ['trips'];
+
    int activityTypeIndex = 0;
    void setActivityTypeIndex(int index){
      activityTypeIndex = index;

@@ -9,7 +9,9 @@ class WalletController extends GetxController implements GetxService{
   WalletController({required this.walletRepo});
 
 
-  List<String> walletTypeList =['wallet_money', 'transaction', 'my_point'];
+  // List<String> walletTypeList =['wallet_money', 'transaction', 'my_point'];
+  List<String> walletTypeList =['wallet_money'];
+
   List<String> walletFilterType =['select','today', 'this_month', 'this_year'];
   List<String> walletTransactionType =['select','pending', 'withdrawn', 'cancelled'];
   List<String> selectedFilterType = ['select','today', 'this_month', 'this_year'];

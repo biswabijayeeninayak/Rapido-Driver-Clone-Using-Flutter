@@ -75,12 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
               SliverToBoxAdapter(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
+
+                    SizedBox(height: 30,),
                     
                     OngoingRideCard(),
 
+                    SizedBox(height: 50,),
+
+
                     MyActivityListView(),
 
-                    RewardListView(),
+                    // RewardListView(),
 
                     SizedBox(height: 100,),
 

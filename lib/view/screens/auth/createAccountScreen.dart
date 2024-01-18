@@ -31,7 +31,7 @@ class CreateAccount extends StatefulWidget {
 class CreateAccountState extends State<CreateAccount> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String countryCode = "+91";
-bool isLoading = true;
+// bool isLoading = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController dpGenderController = TextEditingController();
   TextEditingController dpnameController = TextEditingController();
@@ -97,7 +97,7 @@ bool isLoading = true;
                dpGenderController.text = genderOptions[3];
             }
 
-            isLoading= false;
+            // isLoading= false;
         });
 
         
@@ -250,8 +250,8 @@ bool isLoading = true;
       backgroundColor: Colors.orange[600],
     ),
       body:
-      isLoading?
-      Center(child: CircularProgressIndicator(),):
+      // isLoading?
+      // Center(child: CircularProgressIndicator(),):
       
        Stack(
         children: [

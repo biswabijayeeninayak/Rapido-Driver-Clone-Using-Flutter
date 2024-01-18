@@ -5,7 +5,7 @@ import 'package:ride_sharing_user_app/util/dimensions.dart';
 void customSnackBar(String? message, {bool isError = true, double margin = Dimensions.paddingSizeSmall}) {
   if(message != null && message.isNotEmpty) {
     Get.showSnackbar(GetSnackBar(
-      backgroundColor: isError ? Colors.red : Colors.green,
+      backgroundColor: isError ? Colors.red : Colors.red,
       message: message,
       duration: const Duration(seconds: 2),
       snackStyle: SnackStyle.FLOATING,

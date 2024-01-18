@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Get.isDarkMode? const Color(0xFF053B35) : const Color(0xFF00A08D),
+        statusBarColor: Get.isDarkMode? Color.fromARGB(255, 255, 165, 0): Color.fromARGB(255, 255, 165, 0),
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.dark)
     );

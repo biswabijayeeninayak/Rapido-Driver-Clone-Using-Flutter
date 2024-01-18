@@ -75,12 +75,12 @@ class ProfileScreen extends GetView<ProfileController> {
                     ),
                   ),
                   const SizedBox(height: Dimensions.paddingSizeExtraSmall),
-                  Row(mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('${'your_ratting'.tr} : 5 '),
-                      const Icon(Icons.star_rounded, color: Colors.orange,size: Dimensions.iconSizeSmall,)
-                    ],
-                  ),
+                  // Row(mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //     Text('${'your_ratting'.tr} : 5 '),
+                  //     const Icon(Icons.star_rounded, color: Colors.orange,size: Dimensions.iconSizeSmall,)
+                  //   ],
+                  // ),
 
                   const SizedBox(height: Dimensions.paddingSizeExtraLarge),
 
@@ -88,7 +88,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   profileController.profileTypeIndex == 0?
                   Column(children: const [
                     ProfileItem(title: 'status',value: '',isStatus: true,),
-                    ProfileItem(title: 'my_level',value: '',isLevel: true,),
+                    // ProfileItem(title: 'my_level',value: '',isLevel: true,),
                     ProfileItem(title: 'my_area',value: 'Dhanmondi',),
                     ProfileItem(title: 'contact',value: '0173674828',),
                     ProfileItem(title: 'mail_address',value: 'leslie@gmail.com',),
