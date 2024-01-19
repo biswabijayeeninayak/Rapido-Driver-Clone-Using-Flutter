@@ -160,27 +160,53 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
 
   FocusNode adharFocus = FocusNode();
 
-  File? frontImage;
-  File? backImage;
+  // File? frontImage;
+  // File? backImage;
 
-  Future<void> _getImage([int? index]) async {
-    final XFile? image =
-        await _aadharpicker.pickImage(source: ImageSource.gallery);
+  // Future<void> _getImage([int? index]) async {
+  //   final XFile? image =
+  //       await _aadharpicker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
-      setState(() {
-        if (index != null && _aadharimageFiles!.length > index) {
-          _aadharimageFiles![index] = image;
-        } else {
-          _aadharimageFiles!.add(image);
-        }
-      });
-    }
+  //   if (image != null) {
+  //     setState(() {
+  //       if (index != null && _aadharimageFiles!.length > index) {
+  //         _aadharimageFiles![index] = image;
+  //       } else {
+  //         _aadharimageFiles!.add(image);
+  //       }
+  //     });
+  //   }
+  // }
+
+List<XFile>? _aadharimageFiles = [];
+final ImagePicker _aadharpicker = ImagePicker();
+
+File? frontImage;
+File? backImage;
+
+Future<void> _getImage([int? index]) async {
+  final XFile? image = await _aadharpicker.pickImage(source: ImageSource.gallery);
+
+  if (image != null) {
+    setState(() {
+      if (index != null && _aadharimageFiles!.length > index) {
+        _aadharimageFiles![index] = image;
+      } else {
+        _aadharimageFiles!.add(image);
+      }
+    });
   }
+}
+
 
   TextEditingController RCController = TextEditingController();
 
   FocusNode RCFocus = FocusNode();
+
+
+   List<XFile>? _RCimageFiles = [];
+  final ImagePicker _RCpicker = ImagePicker();
+
   File? RCfrontImage;
   File? RCbackImage;
 
@@ -201,6 +227,12 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
   TextEditingController DLController = TextEditingController();
 
   FocusNode DLFocus = FocusNode();
+
+
+   List<XFile>? _DLimageFiles = [];
+  final ImagePicker _DLpicker = ImagePicker();
+
+
   File? DLfrontImage;
   File? DLbackImage;
 
@@ -210,10 +242,8 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
     if (image != null) {
       setState(() {
         if (index != null && _DLimageFiles!.length > index) {
-          // Replace the image at the given index
           _DLimageFiles![index] = image;
         } else {
-          // Add a new image if no index was provided
           _DLimageFiles!.add(image);
         }
       });
@@ -223,6 +253,11 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
   TextEditingController BAController = TextEditingController();
 
   FocusNode BAFocus = FocusNode();
+
+  List<XFile>? _BAimageFiles = [];
+  final ImagePicker _BApicker = ImagePicker();
+
+
   File? BAfrontImage;
   File? BAbackImage;
 
@@ -232,30 +267,15 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
     if (image != null) {
       setState(() {
         if (index != null && _BAimageFiles!.length > index) {
-          // Replace the image at the given index
           _BAimageFiles![index] = image;
         } else {
-          // Add a new image if no index was provided
           _BAimageFiles!.add(image);
         }
       });
     }
   }
 
-  // Future<void> _getImage(ImageSource source, bool isFrontImage) async {
-  //   final aadharpicker = ImagePicker();
-  //   final pickedImage = await aadharpicker.pickImage(source: source);
-
-  //   if (pickedImage != null) {
-  //     setState(() {
-  //       if (isFrontImage) {
-  //         frontImage = File(pickedImage.path);
-  //       } else {
-  //         backImage = File(pickedImage.path);
-  //       }
-  //     });
-  //   }
-  // }
+ 
 
   FocusNode pickPhoneFocus = FocusNode();
   FocusNode pickDesFocus = FocusNode();
@@ -303,21 +323,28 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
   // List<VehicleData> vehicleList = [];
   // VehicleData? vehicleData;
 
+  // String? selectedOrderSize;
+  // List<XFile>? _imageFiles = [];
+  // final ImagePicker _picker = ImagePicker();
+
+  // List<XFile>? _aadharimageFiles = [];
+  // final ImagePicker _aadharpicker = ImagePicker();
+
   String? selectedOrderSize;
-  List<XFile>? _imageFiles = [];
-  final ImagePicker _picker = ImagePicker();
+List<XFile>? _imageFiles = [];
+final ImagePicker _picker = ImagePicker();
 
-  List<XFile>? _aadharimageFiles = [];
-  final ImagePicker _aadharpicker = ImagePicker();
+// List<XFile>? _aadharimageFiles = [];
+// final ImagePicker _aadharpicker = ImagePicker();
 
-  List<XFile>? _RCimageFiles = [];
-  final ImagePicker _RCpicker = ImagePicker();
+  // List<XFile>? _RCimageFiles = [];
+  // final ImagePicker _RCpicker = ImagePicker();
 
-  List<XFile>? _DLimageFiles = [];
-  final ImagePicker _DLpicker = ImagePicker();
+  // List<XFile>? _DLimageFiles = [];
+  // final ImagePicker _DLpicker = ImagePicker();
 
-  List<XFile>? _BAimageFiles = [];
-  final ImagePicker _BApicker = ImagePicker();
+  // List<XFile>? _BAimageFiles = [];
+  // final ImagePicker _BApicker = ImagePicker();
 
   var errorColor = Colors.grey.withOpacity(0.15);
   var errorColorimg = Colors.grey.withOpacity(0.15);
@@ -353,125 +380,38 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
   void setState(fn) {
     if (mounted) super.setState(fn);
   }
-//Upload adhar details
+//Upload Adhar
 
-// Future<void> uploadAdhar(String adharnumber) async {
-//   print("Upload aadhar");
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   String userId = prefs.getString('userId').toString();
-//   var client = http.Client();
-//   try {
-//     var request = http.MultipartRequest('POST',
-//         Uri.parse('http://kods.tech/munsride/api/storeDocuments/$userId'));
-//     request.fields.addAll({
-//       'govt_id_number': adharnumber,
-//     });
-//     if (frontImage != null) {
-//       request.files.add(await http.MultipartFile.fromPath(
-//           'govt_id_front_img', frontImage!.path));
-//     }
+Future<void> uploadAdhar(String adharcardnumber) async {
+  print("Upload aadhar");
 
-//     if (backImage != null) {
-//       request.files.add(await http.MultipartFile.fromPath(
-//           'govt_id_back_img', backImage!.path));
-//     }
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userId = prefs.getString('userId').toString();
+  var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeDocuments/$userId'));
 
-//     var response = await client.send(request);
+  request.fields.addAll({
+    'govt_id_number': adharcardnumber,
+  });
 
-//     while (response.statusCode == 302) {
-//       // Follow the redirection
-//       var redirectUrl = response.headers['location'];
-//       response = await client.get(Uri.parse(redirectUrl!));
-//     }
-
-//     if (response.statusCode == 200) {
-//       print(await response.stream.bytesToString());
-//       print("Adhar Details added ");
-//       uploadRc(RCController.text.trim());
-//     } else {
-//       print("---");
-//       print(response.statusCode);
-//       print(response.reasonPhrase);
-//     }
-//   } catch (error) {
-//     print("-===-");
-//     print('Error: $error');
-//   } finally {
-//     client.close();
-//   }
-// }
-
-
-  // Future<void> uploadAdhar(String adharnumber) async {
-  //   print("Upload aadhar");
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String userId = prefs.getString('userId').toString();
-  //   print(userId);
-  //   try {
-  //     var request = http.MultipartRequest('POST',
-  //         Uri.parse('http://kods.tech/munsride/api/storeDocuments/$userId'));
-  //     request.fields.addAll({
-  //       'govt_id_number': adharnumber,
-  //     });
-  //     if (frontImage != null) {
-  //       request.files.add(await http.MultipartFile.fromPath(
-  //           'govt_id_front_img', frontImage!.path));
-  //     }
-
-  //     if (backImage != null) {
-  //       request.files.add(await http.MultipartFile.fromPath(
-  //           'govt_id_back_img', backImage!.path));
-  //     }
-  //     http.StreamedResponse response = await request.send();
-
-  //     if (response.statusCode == 200) {
-  //       print(await response.stream.bytesToString());
-  //       print("Adhar Details added ");
-  //       uploadRc(RCController.text.trim());
-  //     } else {
-  //       print("---");
-  //       print(response.statusCode);
-  //       print(response.reasonPhrase);
-  //     }
-  //   } catch (error) {
-  //     print('Error: $error');
-  //   }
-  // }
-
-
- Future<void> uploadAdhar(String adharnumber) async {
-    print("Upload aadhar");
-
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = prefs.getString('userId').toString();
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://kods.tech/munsride/api/storeRc/$userId'));
-      request.fields.addAll({
-        'govt_id_number': adharnumber,
-      });
-      if (frontImage != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'govt_id_front_img', frontImage!.path));
-      }
-
-      if (backImage != null) {
-        request.files.add(
-            await http.MultipartFile.fromPath('govt_id_back_img', backImage!.path));
-      }
-      http.StreamedResponse response = await request.send();
-
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-        print("Adhar Details added ");
-        uploadRc(RCController.text.trim());
-      } else {
-        print(response.reasonPhrase);
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
+  if (_aadharimageFiles!.isNotEmpty) {
+    // Assuming frontImage is at index 0 and backImage is at index 1
+    request.files.add(await http.MultipartFile.fromPath('govt_id_front_img', _aadharimageFiles![0].path));
+    request.files.add(await http.MultipartFile.fromPath('govt_id_back_img', _aadharimageFiles![1].path));
   }
+
+  try {
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      uploadRc(RCController.text.trim());
+    } else {
+      print(response.reasonPhrase);
+    }
+  } catch (error) {
+    print('Error: $error');
+  }
+}
 
 //upload rc details
 
@@ -480,34 +420,31 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://kods.tech/munsride/api/storeRc/$userId'));
-      request.fields.addAll({
-        'rc_number': rcnumber,
-      });
-      if (RCfrontImage != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'rc_imgfront', RCfrontImage!.path));
-      }
+    var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeRc/$userId'));
 
-      if (RCbackImage != null) {
-        request.files.add(
-            await http.MultipartFile.fromPath('rc_imgback', RCbackImage!.path));
-      }
-      http.StreamedResponse response = await request.send();
+  request.fields.addAll({
+    'rc_number': rcnumber,
+  });
 
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-        print("RC Details added ");
-        uploadDL(DLController.text.trim());
-      } else {
-        print(response.reasonPhrase);
-      }
-    } catch (error) {
-      print('Error: $error');
-    }
+  if (_RCimageFiles!.isNotEmpty) {
+    // Assuming frontImage is at index 0 and backImage is at index 1
+    request.files.add(await http.MultipartFile.fromPath('rc_imgfront', _RCimageFiles![0].path));
+    request.files.add(await http.MultipartFile.fromPath('rc_imgback', _RCimageFiles![1].path));
   }
+
+  try {
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      uploadDL(DLController.text.trim());
+    } else {
+      print(response.reasonPhrase);
+    }
+  } catch (error) {
+    print('Error: $error');
+  }
+}
 
 //upload DL details
 
@@ -516,36 +453,32 @@ class SubmitDocumentsState extends State<SubmitDocuments> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://kods.tech/munsride/api/storeDl/$userId'));
-      request.fields.addAll({
-        'dl_number': dlnumber,
-      });
-      if (DLfrontImage != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'dl_imgfront', DLfrontImage!.path));
-      }
+    var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeDl/$userId'));
 
-      if (DLbackImage != null) {
-        request.files.add(
-            await http.MultipartFile.fromPath('dl_imgback', DLbackImage!.path));
-      }
-      http.StreamedResponse response = await request.send();
+  request.fields.addAll({
+    'dl_number': dlnumber,
+  });
 
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-        print("DL Details added ");
-        uploadBA(BAController.text.trim());
-      } else {
-        print(response.reasonPhrase);
-      }
-    } catch (error) {
-      print("---");
-
-      print('Error: $error');
-    }
+  if (_DLimageFiles!.isNotEmpty) {
+    // Assuming frontImage is at index 0 and backImage is at index 1
+    request.files.add(await http.MultipartFile.fromPath('dl_imgfront', _DLimageFiles![0].path));
+    request.files.add(await http.MultipartFile.fromPath('dl_imgback', _DLimageFiles![1].path));
   }
+
+  try {
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      uploadBA(BAController.text.trim());
+    } else {
+      print(response.reasonPhrase);
+    }
+  } catch (error) {
+    print('Error: $error');
+  }
+}
+
 
 //upload bankAccount Deatils
 
@@ -553,28 +486,25 @@ Future<void> uploadBA(String banumber) async {
         print("Upload BA");
 
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse('http://kods.tech/munsride/api/storeRc/$userId'));
-      request.fields.addAll({
-        'bank_account_number': banumber,
-      });
-      if (BAfrontImage != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'bank_imgfront', BAfrontImage!.path));
-      }
+    var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeBank/$userId'));
 
-      if (BAbackImage != null) {
-        request.files.add(
-            await http.MultipartFile.fromPath('bank_imgback', BAbackImage!.path));
-      }
-      http.StreamedResponse response = await request.send();
+  request.fields.addAll({
+    'bank_account_number': banumber,
+  });
 
-      if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
-        print("Bank Account Details added ");
+  if (_BAimageFiles!.isNotEmpty) {
+    // Assuming frontImage is at index 0 and backImage is at index 1
+    request.files.add(await http.MultipartFile.fromPath('bank_imgfront', _BAimageFiles![0].path));
+    request.files.add(await http.MultipartFile.fromPath('bank_imgback', _BAimageFiles![1].path));
+  }
+
+  try {
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
 
         Future.delayed(Duration(milliseconds: 200), () {
           Get.to(
@@ -588,58 +518,12 @@ Future<void> uploadBA(String banumber) async {
           toast("Documents Uploaded Sucessfully");
         });
       } else {
-        print(response.reasonPhrase);
-      }
-    } catch (error) {
-      print('Error: $error');
+      print(response.reasonPhrase);
     }
+  } catch (error) {
+    print('Error: $error');
   }
-
-
-  // Future<void> uploadBA(String banumber) async {
-  //   print("Upload BA");
-
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String userId = prefs.getString('userId').toString();
-  //   try {
-  //     var request = http.MultipartRequest(
-  //         'POST', Uri.parse('http://kods.tech/munsride/api/storeBank/$userId'));
-  //     request.fields.addAll({
-  //       'bank_account_number': banumber,
-  //     });
-  //     if (BAfrontImage != null) {
-  //       request.files.add(await http.MultipartFile.fromPath(
-  //           'bank_imgfront', BAfrontImage!.path));
-  //     }
-
-  //     if (BAbackImage != null) {
-  //       request.files.add(await http.MultipartFile.fromPath(
-  //           'bank_imgback', BAbackImage!.path));
-  //     }
-  //     http.StreamedResponse response = await request.send();
-
-  //     if (response.statusCode == 200) {
-  //       print(await response.stream.bytesToString());
-  //       print("Bank Account Details added ");
-
-  //       Future.delayed(Duration(milliseconds: 200), () {
-  //         Get.off(
-  //           const DocumentsDashboard(
-  //             argument1: true,
-  //             argument2: true,
-  //             argument3: true,
-  //             argument4: true,
-  //           ),
-  //         );
-  //         toast("Documents Uploaded Sucessfully");
-  //       });
-  //     } else {
-  //       print(response.reasonPhrase);
-  //     }
-  //   } catch (error) {
-  //     print('Error: $error');
-  //   }
-  // }
+}
 
 
 
@@ -1333,7 +1217,7 @@ Future<void> uploadBA(String banumber) async {
                     // createOrderApiCall(ORDER_CREATED);
                     // Navigator.pop(context);
                     print("call");
-                    await uploadAdhar(adharController.text.trim());
+                    await uploadAdhar(adharController.text);
                   });
                 }
               }

@@ -35,25 +35,51 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     bool firstTime = true;
     Connectivity connectivity = Connectivity();
     connectivity.checkConnectivity();
+    // _onConnectivityChanged = connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+    //   if(!firstTime) {
+    //     bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
+    //     if(!isNotConnected) ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       backgroundColor: isNotConnected ? Colors.red : Colors.green,
+    //       duration: Duration(seconds: isNotConnected ? 6000 : 3),
+    //       content: Text(
+    //         isNotConnected ? 'no_connection'.tr : 'connected'.tr,
+    //         textAlign: TextAlign.center,
+    //       ),
+    //     ));
+    //     if(!isNotConnected) {
+    //       _route();
+    //     }
+    //   }else {
+    //     firstTime = false;
+    //   }
+    // });
+
     _onConnectivityChanged = connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      if(!firstTime) {
-        bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
-        if(!isNotConnected) ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: isNotConnected ? Colors.red : Colors.green,
-          duration: Duration(seconds: isNotConnected ? 6000 : 3),
-          content: Text(
-            isNotConnected ? 'no_connection'.tr : 'connected'.tr,
-            textAlign: TextAlign.center,
-          ),
-        ));
-        if(!isNotConnected) {
-          _route();
-        }
-      }else {
-        firstTime = false;
-      }
-    });
+  if (!firstTime) {
+    bool isNotConnected = result != ConnectivityResult.wifi && result != ConnectivityResult.mobile;
+    if (!isNotConnected) ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+    // Check if the widget is still mounted before showing SnackBar
+    if (context != null && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: isNotConnected ? Colors.red : Colors.green,
+        duration: Duration(seconds: isNotConnected ? 6000 : 3),
+        content: Text(
+          isNotConnected ? 'no_connection'.tr : 'connected'.tr,
+          textAlign: TextAlign.center,
+        ),
+      ));
+    }
+
+    if (!isNotConnected) {
+      _route();
+    }
+  } else {
+    firstTime = false;
+  }
+});
+
 
     Get.find<ConfigController>().initSharedData();
     _route();

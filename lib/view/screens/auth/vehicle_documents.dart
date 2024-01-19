@@ -49,7 +49,7 @@ bool isLoading = false;
   XFile? dpProfileImage;
 
   List<String> vehicleOptions = ['2 Wheeler', '3 Wheeler'];
-  int? selectedType;
+  String? selectedType;
   
 
   DateTime selectedDate = DateTime.now(); // Default to current date
@@ -217,55 +217,55 @@ VehicleDetails? vehicleDetails;
                     
                     
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 16), // Replacing '16.height' for clarity
-                        Text("Vehicle Type", style: primaryTextStyle()),
-                        SizedBox(height: 8),
-                        DropdownButtonFormField<int>(
-                          isExpanded: true,
-                          value: selectedType,
-                          decoration: commonInputDecoration(),
-                          dropdownColor: Theme.of(context).cardColor,
-                          style: primaryTextStyle(),
-                          items: [
-                            DropdownMenuItem<int>(
-                              value: 1,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.bike_scooter),
-                                  SizedBox(width: 16),
-                                  Text('2 Wheeler', style: primaryTextStyle()),
-                                ],
-                              ),
-                            ),
-                            DropdownMenuItem<int>(
-                              value: 2,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.auto_awesome),
-                                  SizedBox(width: 16),
-                                  Text('3 Whleer', style: primaryTextStyle()),
-                                ],
-                              ),
-                            ),
-                          ],
-                         onChanged: (int? value) {
-  if (value != null) {
-    setState(() {
-      vehicletypeController.text = vehicleOptions[value - 1];
-    });
-    print("Selected vehicle: ${vehicletypeController.text}");
-  }
-},
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    SizedBox(height: 16),
+    Text("Vehicle Type", style: primaryTextStyle()),
+    SizedBox(height: 8),
+    DropdownButtonFormField<String>( // Change type to String
+      isExpanded: true,
+      value: selectedType,
+      decoration: commonInputDecoration(),
+      dropdownColor: Theme.of(context).cardColor,
+      style: primaryTextStyle(),
+      items: [
+        DropdownMenuItem<String>( // Change type to String
+          value: '2 Wheeler', // Update to String
+          child: Row(
+            children: [
+              Icon(Icons.bike_scooter),
+              SizedBox(width: 16),
+              Text('2 Wheeler', style: primaryTextStyle()),
+            ],
+          ),
+        ),
+        DropdownMenuItem<String>( // Change type to String
+          value: '3 Wheeler', // Update to String
+          child: Row(
+            children: [
+              Icon(Icons.auto_awesome),
+              SizedBox(width: 16),
+              Text('3 Wheeler', style: primaryTextStyle()),
+            ],
+          ),
+        ),
+      ],
+     onChanged: (String? value) {
+    if (value != null) {
+      setState(() {
+        vehicletypeController.text = value;
+      });
+      print("Selected vehicle: ${vehicletypeController.text}");
+    }
+  },
 
-                          validator: (value) {
-                            if (value == null) return errorThisFieldRequired;
-                            return null;
-                          },
-                        ),
-                      ],
-                    ),
+  validator: (value) {
+    if (value == null || value.isEmpty) return errorThisFieldRequired;
+    return null;
+  },
+),
+  ],
+),
                   
 
 
@@ -453,12 +453,8 @@ Future<void> FetchVehicleDetails() async {
           modleNameController.text = vehicleDetails!.data!.modelName!;
           modelYearController.text = vehicleDetails!.data!.vehicleModelYear.toString();
           modleNumberController.text = vehicleDetails!.data!.vehicleNumber!;
-          isLoading = false;
-        }
-
-        // Check if vehicle type is not null or empty before updating the controller
-        if (vehicleDetails!.data!.vehicleType != null && vehicleDetails!.data!.vehicleType!.isNotEmpty) {
-          vehicletypeController.text = vehicleDetails!.data!.vehicleType!;
+          selectedType= vehicleDetails!.data!.vehicleType!;
+          // isLoading = false;
         }
       });
     } else {

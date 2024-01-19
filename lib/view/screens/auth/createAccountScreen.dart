@@ -17,7 +17,6 @@ import 'package:ride_sharing_user_app/view/screens/auth/documents_dashboard.dart
 import 'package:http/http.dart' as http;
 import 'package:ride_sharing_user_app/view/widgets/custom_snackbar.dart';
 
-
 class CreateAccount extends StatefulWidget {
   static String tag = '/CreateAccount';
   final bool? isGoogle;
@@ -48,78 +47,57 @@ class CreateAccountState extends State<CreateAccount> {
 
   XFile? dpProfileImage;
 
-  List<String> genderOptions = ['Male', 'Female', 'Other'];
-  int? selectedGender;
-  
+ List<String> genderOptions = ['Male', 'Female', 'Other'];
+String? selectedGender; 
 
-  DateTime selectedDate = DateTime.now(); // Default to current date
+  DateTime selectedDate = DateTime.now();
 
-
- DriverDetails? driverDetails; // Change the type to nullable
+  DriverDetails? driverDetails;
 
   Future<void> FetchDriverDetails() async {
-
-     SharedPreferences prefs = await SharedPreferences.getInstance();
-      String userId = prefs.getString('userId').toString();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userId = prefs.getString('userId').toString();
     try {
-      // Replace 'your_api_url' with the actual API endpoint
-      final response = await http.get(Uri.parse('http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
+      final response = await http.get(Uri.parse(
+          'http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
 
       if (response.statusCode == 200) {
-        // If the server returns a 200 OK response, parse the data
         final Map<String, dynamic> data = json.decode(response.body);
 
         setState(() {
-          // Update the driverDetails variable with the fetched data
           driverDetails = DriverDetails.fromJson(data);
-          // print(driverDetails!.data!.email);
 
-          if (driverDetails!.data!.userName != "null" ||driverDetails!.data!.userName != "" ) {
-            dpnameController.text = driverDetails!.data!.userName! ;
-            dpdobController.text=driverDetails!.data!.dob!;
+          if (driverDetails!.data!.userName != "null" ||
+              driverDetails!.data!.userName != "") {
+            dpnameController.text = driverDetails!.data!.userName!;
+            dpdobController.text = driverDetails!.data!.dob!;
             emailController.text = driverDetails!.data!.email!;
             addressController.text = driverDetails!.data!.address!;
-            dpcontactNumberController.text= driverDetails!.data!.mobile!;
+            dpcontactNumberController.text = driverDetails!.data!.mobile!;
+            selectedGender=driverDetails!.data!.gender!;
+          } 
 
-            }
-            else if(driverDetails!.data!.gender! == "Male"){
-              selectedGender= 1;
-             dpGenderController.text = genderOptions[1];
-            }
-            else if(driverDetails!.data!.gender! == "Female"){
-              selectedGender= 2;
-
-                dpGenderController.text = genderOptions[2];
-            }
-            else if(driverDetails!.data!.gender! == "Other"){
-              selectedGender= 3;
-
-               dpGenderController.text = genderOptions[3];
-            }
-
-            // isLoading= false;
+          // isLoading= false;
         });
-
-        
       } else {
-        // If the server did not return a 200 OK response, throw an exception
         throw Exception('Failed to load data');
       }
     } catch (error) {
       print('Error fetching data: $error');
-      // Handle errors accordingly
     }
   }
 
-
-  Future<void> CreateAccount( String userName, String dob,String email, String gender,String phone,String address) async {
   
- SharedPreferences prefs = await SharedPreferences.getInstance();
-      String userId = prefs.getString('userId').toString();
-    try {
-      var url = Uri.parse('http://kods.tech/munsride/api/dp_save_details/$userId');
 
-    
+
+
+  Future<void> CreateAccount(String userName, String dob, String email,
+      String gender, String phone, String address) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userId = prefs.getString('userId').toString();
+    try {
+      var url =
+          Uri.parse('http://kods.tech/munsride/api/dp_save_details/$userId');
 
       var response = await http.post(
         url,
@@ -138,12 +116,12 @@ class CreateAccountState extends State<CreateAccount> {
       print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
-         Get.to(() => DocumentsDashboard(
-          argument1: true,
-          argument2: false,
-          argument3: false,
-          argument4: false,
-        ));
+        Get.to(() => DocumentsDashboard(
+              argument1: true,
+              argument2: false,
+              argument3: false,
+              argument4: false,
+            ));
       } else {
         print('Registration failed with status code: ${response.statusCode}');
         print(response.reasonPhrase);
@@ -152,9 +130,6 @@ class CreateAccountState extends State<CreateAccount> {
       print('Error during registration: $error');
     }
   }
-
-
-
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -186,29 +161,23 @@ class CreateAccountState extends State<CreateAccount> {
   //   dpnameController.text = getStringAsync(DP_NAME);
   // }
 
- Widget profileImage() {
-  if (dpProfileImage != null) {
-    return Image.file(
-            File(dpProfileImage!.path),
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-          )
-          .cornerRadiusWithClipRRect(100)
-          .center();
-  } else {
-    return Icon(
-      Icons.account_circle,
-      size: 150,  // Set the size according to your requirements
-      color: Colors.grey,  // Set the color according to your requirements
-    )
-    .cornerRadiusWithClipRRect(50)
-    .paddingOnly(right: 4, bottom: 4)
-    .center();
+  Widget profileImage() {
+    if (dpProfileImage != null) {
+      return Image.file(
+        File(dpProfileImage!.path),
+        height: 100,
+        width: 100,
+        fit: BoxFit.cover,
+        alignment: Alignment.center,
+      ).cornerRadiusWithClipRRect(100).center();
+    } else {
+      return Icon(
+        Icons.account_circle,
+        size: 150, // Set the size according to your requirements
+        color: Colors.grey, // Set the color according to your requirements
+      ).cornerRadiusWithClipRRect(50).paddingOnly(right: 4, bottom: 4).center();
+    }
   }
-}
-
 
   Future<void> getImage() async {
     dpProfileImage = null;
@@ -235,8 +204,6 @@ class CreateAccountState extends State<CreateAccount> {
   //   });
   // }
 
-
-
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
@@ -245,15 +212,16 @@ class CreateAccountState extends State<CreateAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-      title: const Text("Create Your Account", style: TextStyle(color: Colors.white)),
-      backgroundColor: Colors.orange[600],
-    ),
+      appBar: AppBar(
+        title: const Text("Create Your Account",
+            style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.orange[600],
+      ),
       body:
-      // isLoading?
-      // Center(child: CircularProgressIndicator(),):
-      
-       Stack(
+          // isLoading?
+          // Center(child: CircularProgressIndicator(),):
+
+          Stack(
         children: [
           SingleChildScrollView(
             padding: EdgeInsets.only(left: 16, top: 16, right: 16, bottom: 16),
@@ -264,7 +232,7 @@ class CreateAccountState extends State<CreateAccount> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    16.height,
+                    // 3.height,
                     Stack(
                       children: [
                         Padding(
@@ -305,7 +273,8 @@ class CreateAccountState extends State<CreateAccount> {
                       errorThisFieldRequired: "This field is required",
                     ),
                     16.height,
-                    Text("Date of Birth(YYYY-MM-DD)", style: primaryTextStyle()),
+                    Text("Date of Birth(YYYY-MM-DD)",
+                        style: primaryTextStyle()),
                     8.height,
                     AppTextField(
                       controller: dpdobController,
@@ -317,7 +286,7 @@ class CreateAccountState extends State<CreateAccount> {
                         _selectDate(context);
                       },
                       decoration: commonInputDecoration(),
-                      errorThisFieldRequired:"This field is required",
+                      errorThisFieldRequired: "This field is required",
                     ),
                     16.height,
                     Text("Email", style: primaryTextStyle()),
@@ -336,59 +305,60 @@ class CreateAccountState extends State<CreateAccount> {
                       children: [
                         // SizedBox(height: 16), // Replacing '16.height' for clarity
                         Text("Gender", style: primaryTextStyle()),
+
                         SizedBox(height: 8),
-                        DropdownButtonFormField<int>(
-                          isExpanded: true,
-                          value: selectedGender,
-                          decoration: commonInputDecoration(),
-                          dropdownColor: Theme.of(context).cardColor,
-                          style: primaryTextStyle(),
-                          items: [
-                            DropdownMenuItem<int>(
-                              value: 1,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.male_rounded),
-                                  SizedBox(width: 16),
-                                  Text('Male', style: primaryTextStyle()),
-                                ],
-                              ),
-                            ),
-                            DropdownMenuItem<int>(
-                              value: 2,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.female_rounded),
-                                  SizedBox(width: 16),
-                                  Text('Female', style: primaryTextStyle()),
-                                ],
-                              ),
-                            ),
-                            DropdownMenuItem<int>(
-                              value: 3,
-                              child: Row(
-                                children: [
-                                  Icon(Icons.outlet_sharp),
-                                  SizedBox(width: 16),
-                                  Text('Other', style: primaryTextStyle()),
-                                ],
-                              ),
-                            ),
-                          ],
-                          onChanged: (int? value) {
-                            if (value != null) {
-                              
-                              setState(() {
-                                dpGenderController.text = genderOptions[value-1];
-                              });
-                              print("Selected Gender: ${dpGenderController.text}");
-                            }
-                          },
-                          validator: (value) {
-                            if (value == null) return errorThisFieldRequired;
-                            return null;
-                          },
-                        ),
+                       DropdownButtonFormField<String>( // Change type to String
+      isExpanded: true,
+      value: selectedGender,
+      decoration: commonInputDecoration(),
+      dropdownColor: Theme.of(context).cardColor,
+      style: primaryTextStyle(),
+      items: [
+        DropdownMenuItem<String>( // Change type to String
+          value: 'Male', // Update to String
+          child: Row(
+            children: [
+              Icon(Icons.male_rounded),
+              SizedBox(width: 16),
+              Text('Male', style: primaryTextStyle()),
+            ],
+          ),
+        ),
+        DropdownMenuItem<String>( // Change type to String
+          value: 'Female', // Update to String
+          child: Row(
+            children: [
+              Icon(Icons.female_rounded),
+              SizedBox(width: 16),
+              Text('Female', style: primaryTextStyle()),
+            ],
+          ),
+        ),
+        DropdownMenuItem<String>( // Change type to String
+          value: 'Other', // Update to String
+          child: Row(
+            children: [
+              Icon(Icons.outlet_sharp),
+              SizedBox(width: 16),
+              Text('Other', style: primaryTextStyle()),
+            ],
+          ),
+        ),
+      ],
+      onChanged: (String? value) { // Change type to String
+        if (value != null) {
+          setState(() {
+            dpGenderController.text = value;
+          });
+          print("Selected Gender: ${dpGenderController.text}");
+        }
+      },
+      validator: (value) {
+        if (value == null) return errorThisFieldRequired;
+        return null;
+      },
+    ),
+ 
                       ],
                     ),
                     16.height,
@@ -407,8 +377,7 @@ class CreateAccountState extends State<CreateAccount> {
                               CountryCodePicker(
                                 initialSelection: countryCode,
                                 showCountryOnly: false,
-                                dialogSize: Size(
-                                    60, 60),
+                                dialogSize: Size(60, 60),
                                 showFlag: true,
                                 enabled: widget.isGoogle.validate(),
                                 showFlagDialog: true,
@@ -423,10 +392,11 @@ class CreateAccountState extends State<CreateAccount> {
                                   iconColor: Theme.of(context).dividerColor,
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Theme.of(context).dividerColor)),
+                                          color:
+                                              Theme.of(context).dividerColor)),
                                   focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.orange.shade600)),
+                                      borderSide: BorderSide(
+                                          color: Colors.orange.shade600)),
                                 ),
                                 searchStyle: primaryTextStyle(),
                                 onInit: (c) {
@@ -481,87 +451,98 @@ class CreateAccountState extends State<CreateAccount> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-         children: [
-        Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: commonButton("Cancel", () {
-    Get.to(() => DocumentsDashboard(
-      argument1: false,
-      argument2: false,
-      argument3: false,
-      argument4: false,
-    ));
-  }, width: MediaQuery.of(context).size.width / 2.5),
-),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: commonButton("Cancel", () {
+                Get.to(() => DocumentsDashboard(
+                      argument1: false,
+                      argument2: false,
+                      argument3: false,
+                      argument4: false,
+                    ));
+              }, width: MediaQuery.of(context).size.width / 2.5),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: commonButton("Save", () {
+                String userName = dpnameController.text;
+                String dob = dpdobController.text;
+                String email = emailController.text;
+                String gender = dpGenderController.text;
+                String phone = dpcontactNumberController.text;
+                String address = addressController.text;
 
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: commonButton("Save", () {
-
-    String userName = dpnameController.text;
-    String dob = dpdobController.text;
-    String email = emailController.text;
-    String gender = dpGenderController.text;
-    String phone = dpcontactNumberController.text;
-    String address = addressController.text;
-
-    if (_formKey.currentState!.validate()) {
-      if (dpGenderController.text.isNotEmpty &&
-          dpdobController.text.isNotEmpty) {
-        CreateAccount(  userName,  dob,  email,  gender,  phone,  address);
-      } else {
-        toast("All fields are required!");
-      }
-    }
-  }, width: MediaQuery.of(context).size.width / 2.5),
-),
-
-
-      ],
+                if (_formKey.currentState!.validate()) {
+                  if (dpGenderController.text.isNotEmpty &&
+                      dpdobController.text.isNotEmpty) {
+                    CreateAccount(userName, dob, email, gender, phone, address);
+                  } else {
+                    toast("All fields are required!");
+                  }
+                }
+              }, width: MediaQuery.of(context).size.width / 2.5),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  
-Widget commonButton(String title, Function() onTap, {double? width, Color? color, Color? textColor}) {
-  return SizedBox(
-    width: width,
-    child: AppButton(
-      padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-      shapeBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(defaultRadius)),
-      elevation: 0,
-      child: Text(
-        title,
-        style: boldTextStyle(color: textColor ?? white),
+  Widget commonButton(String title, Function() onTap,
+      {double? width, Color? color, Color? textColor}) {
+    return SizedBox(
+      width: width,
+      child: AppButton(
+        padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        shapeBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(defaultRadius)),
+        elevation: 0,
+        child: Text(
+          title,
+          style: boldTextStyle(color: textColor ?? white),
+        ),
+        color: color ?? Colors.orange.shade600,
+        onTap: onTap,
       ),
-      color: color ?? Colors.orange.shade600,
-      onTap: onTap,
-    ),
-  );
-}
+    );
+  }
 
-
-InputDecoration commonInputDecoration({String? hintText, IconData? suffixIcon, Function()? suffixOnTap, Widget? dateTime, Widget? prefixIcon, bool? isFill = true}) {
-  return InputDecoration(
-    contentPadding: EdgeInsets.all(16),
-    filled: true,
-    prefixIcon: prefixIcon,
-    isDense: true,
-    hintText: hintText != null ? hintText : '',
-    hintStyle: secondaryTextStyle(size: 16, color: Colors.grey),
-    fillColor: Colors.orange.shade600?.withOpacity(0.06),
-    counterText: '',
-    suffixIcon: dateTime != null
-        ? dateTime
-        : suffixIcon != null
-            ? Icon(suffixIcon, color: Colors.orange.shade600, size: 22).onTap(suffixOnTap)
-            : null,
-    enabledBorder: OutlineInputBorder(borderSide: BorderSide(style: BorderStyle.solid, color: Colors.orange.shade600), borderRadius: BorderRadius.circular(defaultRadius)),
-    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.orange.shade600), borderRadius: BorderRadius.circular(defaultRadius)),
-    errorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red), borderRadius: BorderRadius.circular(defaultRadius)),
-    focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.red), borderRadius: BorderRadius.circular(defaultRadius)),
-  );
-}
-
+  InputDecoration commonInputDecoration(
+      {String? hintText,
+      IconData? suffixIcon,
+      Function()? suffixOnTap,
+      Widget? dateTime,
+      Widget? prefixIcon,
+      bool? isFill = true}) {
+    return InputDecoration(
+      contentPadding: EdgeInsets.all(16),
+      filled: true,
+      prefixIcon: prefixIcon,
+      isDense: true,
+      hintText: hintText != null ? hintText : '',
+      hintStyle: secondaryTextStyle(size: 16, color: Colors.grey),
+      fillColor: Colors.orange.shade600?.withOpacity(0.06),
+      counterText: '',
+      suffixIcon: dateTime != null
+          ? dateTime
+          : suffixIcon != null
+              ? Icon(suffixIcon, color: Colors.orange.shade600, size: 22)
+                  .onTap(suffixOnTap)
+              : null,
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              style: BorderStyle.solid, color: Colors.orange.shade600),
+          borderRadius: BorderRadius.circular(defaultRadius)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.orange.shade600),
+          borderRadius: BorderRadius.circular(defaultRadius)),
+      errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(defaultRadius)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(defaultRadius)),
+    );
+  }
 }
