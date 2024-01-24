@@ -30,12 +30,28 @@ class DocumentsDashboard extends StatefulWidget {
 class _DocumentsDashboardState extends State<DocumentsDashboard> {
   bool shouldShowRow = false;
 
+  // void getData() {
+  //   var sharedPref =SharedPreferences.getInstance();
+  //   bool argument1 = await sharedPref.getBool("argumnet1");
+  //  bool argument2 = sharedPref.getBool("argumnet2");
+  //  bool argument3 = sharedPref.getBool("argumnet3");
+  //  bool argument4 = sharedPref.getBool("argumnet4");
+  //   return true;
+  // }
+
   @override
   Widget build(BuildContext context) {
+  //   var sharedPref =SharedPreferences.getInstance();
+  //  bool argument1 = sharedPref.getBool("argumnet1");
+  //  bool argument2 = sharedPref.getBool("argumnet2");
+  //  bool argument3 = sharedPref.getBool("argumnet3");
+  //  bool argument4 = sharedPref.getBool("argumnet4");
+                
     bool argument1 = widget.argument1;
     bool argument2 = widget.argument2;
     bool argument3 = widget.argument3;
     bool argument4 = widget.argument4;
+    
     return CommonScaffoldComponent(
       appBar: CustomAppBar(
         // forceMaterialTransparency: true,

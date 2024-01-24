@@ -10,18 +10,18 @@ class NotificationRepo{
   Future<Response> getNotificationList() async {
     List<NotificationModel> notificationList = [];
     try {
-      notificationList = [
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
-        NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      // notificationList = [
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
+      //   NotificationModel(title: 'Transaction Nike Air Zoom Product', message: 'Culpa cillum consectetur labore nulla nulla magna irure. Id veniam culpa officia aute dolor amet deserunt ex proident commodo',createdAt: '2022-09-14T13:49:51.000000Z'),
 
 
 
-      ];
+      // ];
 
 
       Response response = Response(body: notificationList, statusCode: 200);

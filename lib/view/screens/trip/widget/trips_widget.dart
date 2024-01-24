@@ -64,7 +64,7 @@ class TripsWidget extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index){
-                  return TripCard(tripModel: tripController.tripList[index]);
+                  // return TripCard(tripModel: tripController.tripList[index]);
                 }),
           )
         ],),
@@ -72,3 +72,4 @@ class TripsWidget extends StatelessWidget {
     );
   }
 }
+

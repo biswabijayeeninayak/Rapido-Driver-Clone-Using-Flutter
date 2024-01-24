@@ -10,6 +10,7 @@ import 'package:ride_sharing_user_app/view/widgets/confirmation_dialog.dart';
 
 
 
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
   @override
@@ -152,4 +153,5 @@ class CustomMenuItem extends StatelessWidget {
     );
   }
 
+ 
 }

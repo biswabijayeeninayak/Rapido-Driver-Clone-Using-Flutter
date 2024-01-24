@@ -87,7 +87,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     Future.delayed(const Duration(milliseconds: 2500), () {
       if(Get.find<AuthController>().isLoggedIn()){
-        Get.offAll(const DocumentsDashboard(argument1: false, argument2: false,argument3: false,argument4: false,));
+        // Get.offAll(const DocumentsDashboard(argument1: false, argument2: false,argument3: false,argument4: false,));
+        Get.offAll(DashboardScreen());
       }else{
           Get.offAll(const SignInScreen());
       }

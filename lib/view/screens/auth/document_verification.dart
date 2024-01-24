@@ -337,7 +337,7 @@ class _DocumentVerificationState extends State<DocumentVerification> {
                       GestureDetector(
                         onTap: (){
                           print("Proceed");
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentsDashboard(argument1: true, argument2: true,argument3: false,argument4: true,)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4"))));
                         },
                         child: Icon(Icons.arrow_circle_right_outlined, color: Colors.blue,size: 40,)
                         )

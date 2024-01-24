@@ -54,6 +54,8 @@ class Images {
   static const String pickImage = 'assets/image/pick_image.png';
   static const String supportDesk = 'assets/image/support_desk.png';
   static const String changePasswordIcon = 'assets/image/change_password_icon.png';
+  static const String deleteAccount = 'assets/image/deleteAccount.png';
+  static const String aboutIcon = 'assets/image/aboutIcon.png';
   static const String languageIcon = 'assets/image/language_icon.png';
   static const String themeIcon = 'assets/image/theme_icon.png';
   static const String rideAssistantIcon = 'assets/image/ride_assistant.png';

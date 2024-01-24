@@ -76,11 +76,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
 
-                    SizedBox(height: 30,),
+                    // SizedBox(height: 20,),
                     
                     OngoingRideCard(),
 
-                    SizedBox(height: 50,),
+                    SizedBox(height: 20,),
 
 
                     MyActivityListView(),

@@ -54,40 +54,78 @@ String? selectedGender;
 
   DriverDetails? driverDetails;
 
-  Future<void> FetchDriverDetails() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String userId = prefs.getString('userId').toString();
-    try {
-      final response = await http.get(Uri.parse(
-          'http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
+  // Future<void> FetchDriverDetails() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String userId = prefs.getString('userId').toString(); 
+  //   try {
+  //     final response = await http.get(Uri.parse(
+  //         'http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
+  //     if (response.statusCode == 200) {
+  //       final Map<String, dynamic> data = json.decode(response.body);
 
-        setState(() {
-          driverDetails = DriverDetails.fromJson(data);
+  //       setState(() {
+  //         driverDetails = DriverDetails.fromJson(data);
 
-          if (driverDetails!.data!.userName != "null" ||
-              driverDetails!.data!.userName != "") {
-            dpnameController.text = driverDetails!.data!.userName!;
-            dpdobController.text = driverDetails!.data!.dob!;
-            emailController.text = driverDetails!.data!.email!;
-            addressController.text = driverDetails!.data!.address!;
-            dpcontactNumberController.text = driverDetails!.data!.mobile!;
-            selectedGender=driverDetails!.data!.gender!;
-          } 
+  //         if (driverDetails!.data!.userName != "null" ||
+  //             driverDetails!.data!.userName != "") {
+  //           dpnameController.text = driverDetails!.data!.userName!;
+  //           dpdobController.text = driverDetails!.data!.dob!;
+  //           emailController.text = driverDetails!.data!.email!;
+  //           addressController.text = driverDetails!.data!.address!;
+  //           dpcontactNumberController.text = driverDetails!.data!.mobile!;
+  //           selectedGender=driverDetails!.data!.gender!;
+  //         } 
 
-          // isLoading= false;
-        });
-      } else {
-        throw Exception('Failed to load data');
-      }
-    } catch (error) {
-      print('Error fetching data: $error');
-    }
-  }
+  //       });
+  //     } else {
+  //       throw Exception('Failed to load data');
+  //     }
+  //   } catch (error) {
+  //     print('Error fetching data: $error');
+  //   }
+  // }
 
   
+  Future<void> FetchDriverDetails() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String userId = prefs.getString('userId').toString();
+  String token = prefs.getString('token').toString();
+  try {
+
+    var response = await http.get(
+      Uri.parse('http://kods.tech/munsride/api/dp_create_account/$userId'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      print(response.body);
+
+      setState(() {
+        driverDetails = DriverDetails.fromJson(data);
+
+        if (driverDetails!.data!.userName != "null" ||
+            driverDetails!.data!.userName != "") {
+          dpnameController.text = driverDetails!.data!.userName!;
+          dpdobController.text = driverDetails!.data!.dob!;
+          emailController.text = driverDetails!.data!.email!;
+          addressController.text = driverDetails!.data!.address!;
+          dpcontactNumberController.text = driverDetails!.data!.mobile!;
+          selectedGender = driverDetails!.data!.gender!;
+        }
+      });
+    } else {
+      throw Exception('Failed to load data');
+    }
+  } catch (error) {
+    print('Error fetching data: $error');
+  }
+}
+
 
 
 
@@ -95,13 +133,17 @@ String? selectedGender;
       String gender, String phone, String address) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
+    String token = prefs.getString('token') ?? ""; 
     try {
       var url =
           Uri.parse('http://kods.tech/munsride/api/dp_save_details/$userId');
 
       var response = await http.post(
         url,
-        headers: {'Content-Type': 'application/json'},
+       headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
         body: json.encode({
           "name": userName,
           "dob": dob,
@@ -116,12 +158,22 @@ String? selectedGender;
       print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
-        Get.to(() => DocumentsDashboard(
-              argument1: true,
-              argument2: false,
-              argument3: false,
-              argument4: false,
-            ));
+      var sharedPref = await SharedPreferences.getInstance();
+
+              //  Get.to(() => DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4")));
+                 Get.to(() => DocumentsDashboard(
+                argument1: sharedPref.getBool("argumnet1") ?? false,
+                argument2: sharedPref.getBool("argumnet2") ?? false,
+                argument3: sharedPref.getBool("argumnet3") ?? false,
+                argument4: sharedPref.getBool("argumnet4") ?? false,
+              ));
+
+// Get.to(() => const DocumentsDashboard(
+//               argument1: false,
+//               argument2: false,
+//               argument3: false,
+//               argument4: false,
+//             ));
       } else {
         print('Registration failed with status code: ${response.statusCode}');
         print(response.reasonPhrase);
@@ -455,12 +507,14 @@ String? selectedGender;
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: commonButton("Cancel", () {
-                Get.to(() => DocumentsDashboard(
-                      argument1: false,
-                      argument2: false,
-                      argument3: false,
-                      argument4: false,
-                    ));
+            //     Get.to(() => const DocumentsDashboard(
+            //   argument1: false,
+            //   argument2: false,
+            //   argument3: false,
+            //   argument4: false,
+            // ));
+                       Get.to(() => DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4")));
+
               }, width: MediaQuery.of(context).size.width / 2.5),
             ),
             Padding(

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 ThemeData lightTheme = ThemeData(
   fontFamily: 'SFProText',
-  primaryColor: const Color.fromARGB(255, 255, 165, 0),
+  primaryColor: const Color.fromARGB(255, 237, 91, 5),
   disabledColor: const Color(0xFFBABFC4),
-  primaryColorDark: const Color.fromARGB(255, 255, 165, 0),
+  primaryColorDark: const Color.fromARGB(255, 237, 91, 5),
   brightness: Brightness.light,
   hintColor: const Color(0xFF9F9F9F),
   cardColor: Colors.white,
   colorScheme: const ColorScheme.light(
-      primary: const Color.fromARGB(255, 255, 165, 0),
+      primary: const Color.fromARGB(255, 237, 91, 5),
       background: Color(0xFFF3F3F3),
       error: Color.fromARGB(255, 232, 162, 77),
-      secondary: const Color.fromARGB(255, 255, 165, 0),
+      secondary: const Color.fromARGB(255, 237, 91, 5),
     tertiary: Color.fromARGB(255, 205, 170, 124),
     tertiaryContainer: Color(0xFFC98B3E),
     secondaryContainer: Color.fromARGB(255, 238, 180, 100),
@@ -23,13 +23,13 @@ ThemeData lightTheme = ThemeData(
     onPrimaryContainer: Color(0xFFDEFFFB),
     primaryContainer: Color(0xFFFFA800),
     onErrorContainer: Color(0xFFFFE6AD),
-    onPrimary: Color.fromARGB(255, 255, 165, 0),
-    surfaceTint: Color.fromARGB(255, 255, 165, 0),
+    onPrimary: Color.fromARGB(255, 237, 91, 5),
+    surfaceTint: Color.fromARGB(255, 237, 91, 5),
     errorContainer: Color(0xFFF6F6F6)
 
 
   ),
-  textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: const Color.fromARGB(255, 255, 165, 0),)),
+  textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(foregroundColor: const Color.fromARGB(255, 237, 91, 5),)),
 
   textTheme: const TextTheme(
    displayLarge: TextStyle(fontWeight: FontWeight.w300, color: Color(0xFF868686)),

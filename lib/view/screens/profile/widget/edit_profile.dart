@@ -99,9 +99,9 @@ class ProfileEditScreenState extends State<ProfileEditScreen>  with TickerProvid
                 Row(children: [
                   Expanded(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      TextFieldTitle(title: 'first_name'.tr,),
+                      TextFieldTitle(title: 'Name'.tr,),
                       CustomTextField(
-                        hintText: 'first_name'.tr,
+                        hintText: 'Full Name'.tr,
                         inputType: TextInputType.name,
                         prefixIcon: Images.person,
                         controller: authController.fNameController,
@@ -112,21 +112,21 @@ class ProfileEditScreenState extends State<ProfileEditScreen>  with TickerProvid
                     ),
                   ),
 
-                  const SizedBox(width: Dimensions.paddingSizeDefault,),
-                  Expanded(
-                    child:  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      TextFieldTitle(title: 'last_name'.tr,),
-                      CustomTextField(
-                        hintText: 'last_name'.tr,
-                        inputType: TextInputType.name,
-                        prefixIcon: Images.person,
-                        controller: authController.lNameController,
-                        focusNode: authController.lNameNode,
-                        nextFocus: authController.phoneNode,
-                        inputAction: TextInputAction.next,
-                      )],
-                    ),
-                  )
+                  // const SizedBox(width: Dimensions.paddingSizeDefault,),
+                  // Expanded(
+                  //   child:  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  //     TextFieldTitle(title: 'last_name'.tr,),
+                  //     CustomTextField(
+                  //       hintText: 'last_name'.tr,
+                  //       inputType: TextInputType.name,
+                  //       prefixIcon: Images.person,
+                  //       controller: authController.lNameController,
+                  //       focusNode: authController.lNameNode,
+                  //       nextFocus: authController.phoneNode,
+                  //       inputAction: TextInputAction.next,
+                  //     )],
+                  //   ),
+                  // )
                 ]),
 
                 TextFieldTitle(title: 'phone'.tr,),

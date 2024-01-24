@@ -19,6 +19,8 @@ import 'package:ride_sharing_user_app/view/screens/review/review_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/setting/setting_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/trip/trip_screen.dart';
 import 'package:ride_sharing_user_app/view/widgets/confirmation_dialog.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileMenuScreen extends StatelessWidget {
   const ProfileMenuScreen({Key? key}) : super(key: key);
@@ -56,7 +58,10 @@ class ProfileMenuScreen extends StatelessWidget {
                               Get.find<AuthController>().clearSharedData().then((condition) {
                                 Get.back();
                                 Get.offAll(const SignInScreen());
-                              });
+                            // logout();
+                              }
+                            
+                            );
 
                             },);
                         });
@@ -66,6 +71,49 @@ class ProfileMenuScreen extends StatelessWidget {
       ),
     );
   }
+
+  
+
+//    Future<void> logout() async {
+
+//      SharedPreferences prefs = await SharedPreferences.getInstance();
+//   // String userId = prefs.getString('userId').toString();
+//   String token = prefs.getString('token').toString();
+//   print(token);
+//   try {
+   
+
+//     var response = await http.get(
+//       Uri.parse('http://kods.tech/munsride/api/pilot_logout'),
+//        headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer $token',
+//       },
+//     );
+//       print('Logout failed with status: ${response.statusCode}');
+//       print('Reason: ${response.reasonPhrase}');
+
+
+//     if (response.statusCode == 200) {
+//       print("enter 200");
+//       print('Logout failed with status: ${response.statusCode}');
+//       print('Reason: ${response.reasonPhrase}');
+
+//       print('Logout successful');
+
+//       // Get.back();
+//       Get.offAll(const SignInScreen());
+//       // Additional logic for successful logout
+//     } else {
+//       print('Logout failed with status: ${response.statusCode}');
+//       print('Reason: ${response.reasonPhrase}');
+//       // Handle error response
+//     }
+//   } catch (error) {
+//     print('Error during logout: $error');
+//     // Handle any exceptions that may occur during the logout process
+//   }
+// }
 }
 
 
@@ -91,4 +139,6 @@ class ProfileMenuItem extends StatelessWidget {
       ),
     );
   }
+
+
 }

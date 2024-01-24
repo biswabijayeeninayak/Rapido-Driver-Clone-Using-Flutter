@@ -6,6 +6,7 @@ import 'package:ride_sharing_user_app/util/dimensions.dart';
 import 'package:ride_sharing_user_app/util/images.dart';
 import 'package:ride_sharing_user_app/util/styles.dart';
 import 'package:ride_sharing_user_app/view/screens/forgot_password/reset_password_screen.dart';
+import 'package:ride_sharing_user_app/view/screens/setting/aboutAccount_screen.dart';
 import 'package:ride_sharing_user_app/view/screens/setting/controller/setting_controller.dart';
 import 'package:ride_sharing_user_app/view/screens/setting/widget/theme_change_widget.dart';
 import 'package:ride_sharing_user_app/view/widgets/custom_app_bar.dart';
@@ -156,6 +157,30 @@ class SettingScreen extends StatelessWidget {
                   SizedBox(width: Dimensions.iconSizeMedium, child: Image.asset(Images.changePasswordIcon)),
                   const SizedBox(width: Dimensions.paddingSizeSmall),
                   Text('change_password'.tr)
+                ],),
+              ),
+            ),
+
+             GestureDetector(
+              onTap: ()=>  Get.to(()=>const AboutAccount()),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB( Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault,),
+                child: Row(children: [
+                  SizedBox(width: Dimensions.iconSizeMedium, child: Image.asset(Images.aboutIcon)),
+                  const SizedBox(width: Dimensions.paddingSizeSmall),
+                  Text('About'.tr)
+                ],),
+              ),
+            ),
+
+             GestureDetector(
+              onTap: ()=>  Get.to(()=>const ResetPasswordScreen(fromChangePassword: true)),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB( Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault,),
+                child: Row(children: [
+                  SizedBox(width: Dimensions.iconSizeMedium, child: Image.asset(Images.deleteAccount)),
+                  const SizedBox(width: Dimensions.paddingSizeSmall),
+                  Text('Delete Account'.tr)
                 ],),
               ),
             ),

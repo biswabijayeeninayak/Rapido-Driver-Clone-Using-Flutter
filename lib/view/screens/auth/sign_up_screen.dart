@@ -286,7 +286,7 @@ void _showRoleSelectionCard(BuildContext context) {
             ListTile(
               title: const Text('Delivery Partner'),
               leading: Radio(
-                value: 'Delivery Partner',
+                value: 'DeliveryPartner',
                 groupValue: selectedRole,
                 onChanged: (value) {
                   setState(() {

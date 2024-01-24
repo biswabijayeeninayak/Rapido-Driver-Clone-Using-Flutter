@@ -334,18 +334,6 @@ Future<void> _getImage([int? index]) async {
 List<XFile>? _imageFiles = [];
 final ImagePicker _picker = ImagePicker();
 
-// List<XFile>? _aadharimageFiles = [];
-// final ImagePicker _aadharpicker = ImagePicker();
-
-  // List<XFile>? _RCimageFiles = [];
-  // final ImagePicker _RCpicker = ImagePicker();
-
-  // List<XFile>? _DLimageFiles = [];
-  // final ImagePicker _DLpicker = ImagePicker();
-
-  // List<XFile>? _BAimageFiles = [];
-  // final ImagePicker _BApicker = ImagePicker();
-
   var errorColor = Colors.grey.withOpacity(0.15);
   var errorColorimg = Colors.grey.withOpacity(0.15);
   LatLng _initialPosition =
@@ -387,7 +375,7 @@ Future<void> uploadAdhar(String adharcardnumber) async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String userId = prefs.getString('userId').toString();
-  var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeDocuments/$userId'));
+  var request = http.MultipartRequest('POST', Uri.parse('http://kods.tech/munsride/api/storeID/$userId'));
 
   request.fields.addAll({
     'govt_id_number': adharcardnumber,
@@ -508,13 +496,14 @@ Future<void> uploadBA(String banumber) async {
 
         Future.delayed(Duration(milliseconds: 200), () {
           Get.to(
-            const DocumentsDashboard(
-              argument1: true,
-              argument2: true,
-              argument3: true,
-              argument4: true,
-            ),
+             DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4"))
           );
+          // Get.to(() => const DocumentsDashboard(
+          //     argument1: false,
+          //     argument2: false,
+          //     argument3: false,
+          //     argument4: false,
+          //   ));
           toast("Documents Uploaded Sucessfully");
         });
       } else {
