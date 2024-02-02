@@ -41,7 +41,7 @@ class WalletMoneyAmountWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeDefault),
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
                       Text( isWithDraw? 'withdrawable'.tr : walletController.walletTypeIndex == 0?
-                      'USD':walletController.walletTypeIndex == 1?
+                      'IND':walletController.walletTypeIndex == 1?
                         walletController.selectedFilterTypeName.tr : 'point'.tr,
                         style: textBold.copyWith(color: Theme.of(context).primaryColor.withOpacity(.75), fontSize: Dimensions.fontSizeLarge),),
                       Row(

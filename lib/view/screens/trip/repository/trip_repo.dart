@@ -11,15 +11,7 @@ class TripRepo{
     List<TripModel> tripList = [];
     try {
       tripList = [
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-        TripModel(title: 'Time Squire Marvel, Street 6H', amount: 1234, createdAt: '2022-09-14T13:49:51.000000Z',type: 'bike'),
-
+        
 
       ];
 

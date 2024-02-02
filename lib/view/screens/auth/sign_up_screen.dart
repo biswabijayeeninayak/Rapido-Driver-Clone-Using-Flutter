@@ -225,7 +225,7 @@ return Scaffold(
                         }else if(email.isEmpty){
                           showCustomSnackBar('confirm_password_is_required'.tr);
                         }else if(role.isEmpty){
-                          showCustomSnackBar('confirm_password_is_required'.tr);
+                          showCustomSnackBar('role is required'.tr);
                         }else if (!_acceptTerms) {
                           showCustomSnackBar(
                               'Please accept the terms and conditions to register.');

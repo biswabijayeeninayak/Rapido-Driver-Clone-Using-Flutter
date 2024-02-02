@@ -65,7 +65,7 @@ class HelpAndSupportScreen extends StatelessWidget {
                       padding:  const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
                         Text('you_can_send_us_email_through'.tr, style: textRegular.copyWith(color: Theme.of(context).hintColor)),
-                        Text('test@gmail.com',
+                        Text('info@munsride.com',
                           style: textSemiBold.copyWith(fontSize: Dimensions.fontSizeDefault),),
                         Padding(
                             padding:  const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
@@ -100,7 +100,7 @@ class HelpAndSupportScreen extends StatelessWidget {
                             children: [
                               TextSpan(text: 'contact_with_us'.tr, style: textRegular.copyWith(color: Theme.of(context).hintColor)),
                               const TextSpan(
-                                text: '16254',
+                                text: '+917073764658',
                                 style: textSemiBold,
                               ),
                             ],
@@ -139,7 +139,7 @@ class HelpAndSupportScreen extends StatelessWidget {
                       padding:  const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
                       child: CustomButton(buttonText: 'call'.tr, icon: Icons.call,radius: 100,
                         onPressed: (){
-                        _launchUrl("tel:+8812345678",false);
+                        _launchUrl("tel:+917073764658",false);
                       },),
                     )),
                   ],),
@@ -163,7 +163,7 @@ class HelpAndSupportScreen extends StatelessWidget {
 
 final Uri params = Uri(
   scheme: 'mailto',
-  path: 'test@gmail.com',
+  path: 'info@munsride.com',
   query: 'subject=support Feedback&body=',
 );
 

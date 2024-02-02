@@ -263,10 +263,12 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  // Future<void> Login2(String phone, String password) async {
+  // Future<void> Login(String phone, String password) async {
+  //       //  var sharedPref = await SharedPreferences.getInstance();
   //   print("entered");
   //   try {
   //     var url = Uri.parse('${Constant().url}dp_login');
+  //      var sharedPreferences = await SharedPreferences.getInstance();
 
   //     String phoneNumberWithoutCode =
   //         phone.startsWith('+91') ? phone.substring(3) : phone;
@@ -287,6 +289,8 @@ class _SignInScreenState extends State<SignInScreen> {
 
   //     if (response.statusCode == 200) {
   //       var sharedPref = await SharedPreferences.getInstance();
+  //       sharedPref.setString('userId', responseData['data']['id'].toString());
+  //        print('USER ID : ${sharedPreferences.getString("userId")}');
 
   //       // var responseBody = json.decode(response.body);
   //       // String token = responseBody['token'];
@@ -310,30 +314,12 @@ class _SignInScreenState extends State<SignInScreen> {
   //       sharedPref.setBool('argumnet2', responseData['status'][1]);
   //       sharedPref.setBool('argumnet1', responseData['status'][0]);
 
-  //       // Get.to(() =>  DocumentsDashboard(argument1: false, argument2: false, argument3: false, argument4: false,));}
+  //       Get.to(() =>  DocumentsDashboard(argument1: false, argument2: false, argument3: false, argument4: false,));}
   //       print(responseData['status'][0]);
   //       print("_" * 25);
   //       print(await getBoolAsync("argumnet1"));
-  //       if (getBoolAsync("argumnet1") &&
-  //           getBoolAsync("argumnet2") &&
-  //           getBoolAsync("argumnet3") &&
-  //           getBoolAsync("argumnet4")) {
-  //         Get.to(() => DashboardScreen());
-  //       } else {
-  //         Get.to(() => DocumentsDashboard(
-  //               argument1: getBoolAsync("argumnet1"),
-  //               argument2: getBoolAsync("argumnet2"),
-  //               argument3: getBoolAsync("argumnet3"),
-  //               argument4: getBoolAsync("argumnet4"),
-  //             ).launch(context,
-  //                 pageRouteAnimation: PageRouteAnimation.Scale,
-  //                 isNewTask: true));
-  //       }
-  //     } else {
-  //       customSnackBar('Login failed,Number Not Registred');
-  //       print('Login failed with status code: ${response.statusCode}');
-  //       print(response.reasonPhrase);
-  //     }
+       
+     
   //   } catch (error) {
   //     print('Error during Login: $error');
   //   }

@@ -106,7 +106,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                       "This Field is already been submitted! Kindly complete next steps to start the ride.");
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -135,7 +135,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                   Get.to(() => CreateAccount());
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -163,7 +163,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                       "This Field is already been submitted! Kindly complete next steps to start the ride.");
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -196,7 +196,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                   }
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -224,7 +224,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                       "This Field is already been submitted! Kindly complete next steps to start the ride.");
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -257,7 +257,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                                   }
                                 },
                                 // width: context.width(),
-                                color: Colors.orange[600],
+                                color: Color.fromARGB(255, 237, 91, 5),
                                 textColor: Colors.white,
                                 shapeBorder: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
@@ -290,7 +290,7 @@ class _DocumentsDashboardState extends State<DocumentsDashboard> {
                             }
                           },
                           // width: context.width(),
-                          color: Colors.orange[600],
+                          color: Color.fromARGB(255, 237, 91, 5),
                           textColor: Colors.white,
                           shapeBorder: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),

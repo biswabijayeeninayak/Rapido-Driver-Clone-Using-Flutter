@@ -41,7 +41,7 @@ class DriverHeaderInfoWidget extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeLarge, Dimensions.paddingSizeExtraSmall, Dimensions.paddingSizeLarge,0),
                             child: Column(mainAxisSize: MainAxisSize.min,children: [
-                              Text('${'\$ 765.09'} / ${'3'} ${'trip'.tr}'),
+                              Text('${'\₹ 765.09'} / ${'3'} ${'trip'.tr}'),
                               Text('todays_earn'.tr, style: textRegular.copyWith(color: Theme.of(context).primaryColor),),
                               Icon(Icons.arrow_drop_down_outlined,color: Theme.of(context).hintColor,)
                             ],),
@@ -56,7 +56,7 @@ class DriverHeaderInfoWidget extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeLarge, Dimensions.paddingSizeExtraSmall, Dimensions.paddingSizeLarge,0),
                                 child: Column(mainAxisSize: MainAxisSize.min,children: [
-                                  Text('${'\$ 765.09'} / ${'3'} ${'trip'.tr}'),
+                                  Text('${'\₹ 765.09'} / ${'3'} ${'trip'.tr}'),
                                   Text('todays_earn'.tr, style: textRegular.copyWith(color: Theme.of(context).primaryColor),),
                                   Icon(Icons.arrow_drop_down_outlined,color: Theme.of(context).hintColor,)
                                 ],),
@@ -72,7 +72,7 @@ class DriverHeaderInfoWidget extends StatelessWidget {
                                child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [
                                  CircleAvatar(radius: 2,backgroundColor: Theme.of(context).hintColor),
                                  const SizedBox(width: Dimensions.paddingSizeExtraSmall),
-                                 const Text('Trip 1.34hr / 12.21 pm - \$ 222'),
+                                 const Text('Trip 1.34hr / 12.21 pm - \₹ 222'),
                                ],),
                              );
                            }),

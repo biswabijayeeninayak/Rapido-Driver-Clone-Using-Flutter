@@ -48,93 +48,97 @@ class CreateAccountState extends State<CreateAccount> {
   XFile? dpProfileImage;
 
  List<String> genderOptions = ['Male', 'Female', 'Other'];
-String? selectedGender; 
+ String selectedGender = 'Male';
 
   DateTime selectedDate = DateTime.now();
 
   DriverDetails? driverDetails;
 
-  // Future<void> FetchDriverDetails() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String userId = prefs.getString('userId').toString(); 
-  //   try {
-  //     final response = await http.get(Uri.parse(
-  //         'http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
+  Future<void> FetchDriverDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userId = prefs.getString('userId').toString(); 
+    try {
+      final response = await http.get(Uri.parse(
+          'http://kods.tech/munsride/api/dp_create_account/${userId.toString()}'));
 
-  //     if (response.statusCode == 200) {
-  //       final Map<String, dynamic> data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
 
-  //       setState(() {
-  //         driverDetails = DriverDetails.fromJson(data);
+        setState(() {
+          driverDetails = DriverDetails.fromJson(data);
 
-  //         if (driverDetails!.data!.userName != "null" ||
-  //             driverDetails!.data!.userName != "") {
-  //           dpnameController.text = driverDetails!.data!.userName!;
-  //           dpdobController.text = driverDetails!.data!.dob!;
-  //           emailController.text = driverDetails!.data!.email!;
-  //           addressController.text = driverDetails!.data!.address!;
-  //           dpcontactNumberController.text = driverDetails!.data!.mobile!;
-  //           selectedGender=driverDetails!.data!.gender!;
-  //         } 
+          if (driverDetails!.data!.userName != "null" ||
+              driverDetails!.data!.userName != "") {
+            dpnameController.text = driverDetails!.data!.userName!;
+            dpdobController.text = driverDetails!.data!.dob!;
+            emailController.text = driverDetails!.data!.email!;
+            addressController.text = driverDetails!.data!.address!;
+            dpcontactNumberController.text = driverDetails!.data!.mobile!;
+            // selectedGender=driverDetails!.data!.gender!;
+          } 
 
-  //       });
-  //     } else {
-  //       throw Exception('Failed to load data');
-  //     }
-  //   } catch (error) {
-  //     print('Error fetching data: $error');
-  //   }
-  // }
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (error) {
+      print('Error fetching data: $error');
+    }
+  }
 
   
-  Future<void> FetchDriverDetails() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String userId = prefs.getString('userId').toString();
-  String token = prefs.getString('token').toString();
-  try {
+//   Future<void> FetchDriverDetails() async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   String userId = prefs.getString('userId').toString();
+//   String token = prefs.getString('token').toString();
+//   try {
 
-    var response = await http.get(
-      Uri.parse('http://kods.tech/munsride/api/dp_create_account/$userId'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
-      },
-    );
+//     var response = await http.get(
+//       Uri.parse('http://kods.tech/munsride/api/dp_create_account/$userId'),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer $token',
+//       },
+//     );
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      print(response.body);
+//     if (response.statusCode == 200) {
+//       final Map<String, dynamic> data = json.decode(response.body);
+//       print(response.body);
 
-      setState(() {
-        driverDetails = DriverDetails.fromJson(data);
+//       setState(() {
+//         driverDetails = DriverDetails.fromJson(data);
 
-        if (driverDetails!.data!.userName != "null" ||
-            driverDetails!.data!.userName != "") {
-          dpnameController.text = driverDetails!.data!.userName!;
-          dpdobController.text = driverDetails!.data!.dob!;
-          emailController.text = driverDetails!.data!.email!;
-          addressController.text = driverDetails!.data!.address!;
-          dpcontactNumberController.text = driverDetails!.data!.mobile!;
-          selectedGender = driverDetails!.data!.gender!;
-        }
-      });
-    } else {
-      throw Exception('Failed to load data');
-    }
-  } catch (error) {
-    print('Error fetching data: $error');
-  }
-}
+//         if (driverDetails!.data!.userName != "null" ||
+//             driverDetails!.data!.userName != "") {
+//           dpnameController.text = driverDetails!.data!.userName!;
+//           dpdobController.text = driverDetails!.data!.dob!;
+//           emailController.text = driverDetails!.data!.email!;
+//           addressController.text = driverDetails!.data!.address!;
+//           dpcontactNumberController.text = driverDetails!.data!.mobile!;
+//           // selectedGender = driverDetails!.data!.gender!;
+//         }
+//       });
+//     } else {
+//       throw Exception('Failed to load data');
+//     }
+//   } catch (error) {
+//     print('Error fetching data: $error');
+//   }
+// }
 
 
 
 
   Future<void> CreateAccount(String userName, String dob, String email,
+      
+
       String gender, String phone, String address) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('userId').toString();
     String token = prefs.getString('token') ?? ""; 
     try {
+       var sharedPreferences = await SharedPreferences.getInstance();
+
       var url =
           Uri.parse('http://kods.tech/munsride/api/dp_save_details/$userId');
 
@@ -160,13 +164,13 @@ String? selectedGender;
       if (response.statusCode == 200) {
       var sharedPref = await SharedPreferences.getInstance();
 
-              //  Get.to(() => DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4")));
-                 Get.to(() => DocumentsDashboard(
-                argument1: sharedPref.getBool("argumnet1") ?? false,
-                argument2: sharedPref.getBool("argumnet2") ?? false,
-                argument3: sharedPref.getBool("argumnet3") ?? false,
-                argument4: sharedPref.getBool("argumnet4") ?? false,
-              ));
+               Get.to(() => DocumentsDashboard(argument1: getBoolAsync("argument1"), argument2: getBoolAsync("argument2"), argument3: getBoolAsync("argument3"), argument4: getBoolAsync("argument4")));
+              //    Get.to(() => DocumentsDashboard(
+              //   argument1: sharedPref.getBool("argumnet1") ?? false,
+              //   argument2: sharedPref.getBool("argumnet2") ?? false,
+              //   argument3: sharedPref.getBool("argumnet3") ?? false,
+              //   argument4: sharedPref.getBool("argumnet4") ?? false,
+              // ));
 
 // Get.to(() => const DocumentsDashboard(
 //               argument1: false,
@@ -175,11 +179,11 @@ String? selectedGender;
 //               argument4: false,
 //             ));
       } else {
-        print('Registration failed with status code: ${response.statusCode}');
+        print('Data fetching failed with status code: ${response.statusCode}');
         print(response.reasonPhrase);
       }
     } catch (error) {
-      print('Error during registration: $error');
+      print('Error during fetch the data: $error');
     }
   }
 
@@ -267,7 +271,7 @@ String? selectedGender;
       appBar: AppBar(
         title: const Text("Create Your Account",
             style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.orange[600],
+        backgroundColor: Color.fromARGB(255, 237, 91, 5),
       ),
       body:
           // isLoading?
@@ -297,7 +301,7 @@ String? selectedGender;
                           //   margin: EdgeInsets.only(top: 130, left: 80),
                           //   padding: EdgeInsets.all(6),
                           //   decoration: boxDecorationWithRoundedCorners(
-                          //       backgroundColor: Colors.orange.shade600,
+                          //       backgroundColor: Color.fromARGB(255, 237, 91, 5),
                           //       border: Border.all(width: 1, color: Colors.white),
                           //       boxShape: BoxShape.circle),
                           //   child: Icon(
@@ -359,60 +363,85 @@ String? selectedGender;
                         Text("Gender", style: primaryTextStyle()),
 
                         SizedBox(height: 8),
-                       DropdownButtonFormField<String>( // Change type to String
-      isExpanded: true,
-      value: selectedGender,
-      decoration: commonInputDecoration(),
-      dropdownColor: Theme.of(context).cardColor,
-      style: primaryTextStyle(),
-      items: [
-        DropdownMenuItem<String>( // Change type to String
-          value: 'Male', // Update to String
-          child: Row(
-            children: [
-              Icon(Icons.male_rounded),
-              SizedBox(width: 16),
-              Text('Male', style: primaryTextStyle()),
-            ],
-          ),
-        ),
-        DropdownMenuItem<String>( // Change type to String
-          value: 'Female', // Update to String
-          child: Row(
-            children: [
-              Icon(Icons.female_rounded),
-              SizedBox(width: 16),
-              Text('Female', style: primaryTextStyle()),
-            ],
-          ),
-        ),
-        DropdownMenuItem<String>( // Change type to String
-          value: 'Other', // Update to String
-          child: Row(
-            children: [
-              Icon(Icons.outlet_sharp),
-              SizedBox(width: 16),
-              Text('Other', style: primaryTextStyle()),
-            ],
-          ),
-        ),
-      ],
-      onChanged: (String? value) { // Change type to String
-        if (value != null) {
-          setState(() {
-            dpGenderController.text = value;
-          });
-          print("Selected Gender: ${dpGenderController.text}");
-        }
-      },
-      validator: (value) {
-        if (value == null) return errorThisFieldRequired;
-        return null;
-      },
+ DropdownButtonFormField<String>(
+  isExpanded: true,
+  value: selectedGender,  
+  decoration: commonInputDecoration(),
+  dropdownColor: Theme.of(context).cardColor,
+  style: primaryTextStyle(),
+  items: [
+    DropdownMenuItem<String>(
+      value: 'Male',
+      child: Row(
+        children: [
+          Icon(Icons.male_rounded),
+          SizedBox(width: 16),
+          Text('Male', style: primaryTextStyle()),
+        ],
+      ),
     ),
- 
+    DropdownMenuItem<String>(
+      value: 'Female',
+      child: Row(
+        children: [
+          Icon(Icons.female_rounded),
+          SizedBox(width: 16),
+          Text('Female', style: primaryTextStyle()),
+        ],
+      ),
+    ),
+    DropdownMenuItem<String>(
+      value: 'Other',
+      child: Row(
+        children: [
+          Icon(Icons.outlet_sharp),
+          SizedBox(width: 16),
+          Text('Other', style: primaryTextStyle()),
+        ],
+      ),
+    ),
+  ],
+  onChanged: (String? value) {
+    if (value != null) {
+      setState(() {
+        selectedGender = value;
+        dpGenderController.text = value;
+      });
+      print("Selected Gender: $value");
+    }
+  },
+  validator: (value) {
+    if (value == null) return errorThisFieldRequired;
+    return null;
+  },
+),
                       ],
                     ),
+
+    //  Column(
+    //   mainAxisAlignment: MainAxisAlignment.center,
+    //   children: [
+    //     Text('Select Gender:'),
+    //     SizedBox(height: 10),
+    //     DropdownButton<String>(
+    //       value: selectedGender,
+    //       onChanged: (String? newValue) {
+    //         setState(() {
+    //           selectedGender = newValue!;
+    //         });
+    //       },
+    //       items: <String>['Male', 'Female', 'Others']
+    //           .map<DropdownMenuItem<String>>((String value) {
+    //         return DropdownMenuItem<String>(
+    //           value: value,
+    //           child: Text(value),
+    //         );
+    //       }).toList(),
+    //     ),
+    //     SizedBox(height: 20),
+    //     Text('Selected Gender: $selectedGender'),
+    //   ],
+    // ),
                     16.height,
                     Text("ContactNumber", style: primaryTextStyle()),
                     8.height,
@@ -448,7 +477,7 @@ String? selectedGender;
                                               Theme.of(context).dividerColor)),
                                   focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.orange.shade600)),
+                                          color: Color.fromARGB(255, 237, 91, 5))),
                                 ),
                                 searchStyle: primaryTextStyle(),
                                 onInit: (c) {
@@ -556,7 +585,7 @@ String? selectedGender;
           title,
           style: boldTextStyle(color: textColor ?? white),
         ),
-        color: color ?? Colors.orange.shade600,
+        color: color ?? Color.fromARGB(255, 237, 91, 5),
         onTap: onTap,
       ),
     );
@@ -576,20 +605,20 @@ String? selectedGender;
       isDense: true,
       hintText: hintText != null ? hintText : '',
       hintStyle: secondaryTextStyle(size: 16, color: Colors.grey),
-      fillColor: Colors.orange.shade600?.withOpacity(0.06),
+      fillColor: Color.fromARGB(255, 237, 91, 5)?.withOpacity(0.06),
       counterText: '',
       suffixIcon: dateTime != null
           ? dateTime
           : suffixIcon != null
-              ? Icon(suffixIcon, color: Colors.orange.shade600, size: 22)
+              ? Icon(suffixIcon, color: Color.fromARGB(255, 237, 91, 5), size: 22)
                   .onTap(suffixOnTap)
               : null,
       enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-              style: BorderStyle.solid, color: Colors.orange.shade600),
+              style: BorderStyle.solid, color: Color.fromARGB(255, 237, 91, 5)),
           borderRadius: BorderRadius.circular(defaultRadius)),
       focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.orange.shade600),
+          borderSide: BorderSide(color: Color.fromARGB(255, 237, 91, 5)),
           borderRadius: BorderRadius.circular(defaultRadius)),
       errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red),

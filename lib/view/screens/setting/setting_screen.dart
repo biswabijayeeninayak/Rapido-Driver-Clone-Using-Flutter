@@ -21,33 +21,33 @@ class SettingScreen extends StatelessWidget {
       body: GetBuilder<SettingController>(
         builder: (settingController) {
           return Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB( Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault,),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
-                Row(children: [
-                  SizedBox(width: Dimensions.iconSizeMedium, child: Image.asset(Images.rideAssistantIcon)),
-                  const SizedBox(width: Dimensions.paddingSizeSmall),
-                  Text('ride_assistant'.tr)
-                ],),
-                FlutterSwitch(
-                  width: 37.0,
-                  height: 19.0,
-                  valueFontSize: 14.0,
-                  toggleSize: 15.0,
-                  value: settingController.rideAssistantStatus,
-                  borderRadius: 30.0,
-                  padding: 2,
-                  activeColor: Theme.of(context).primaryColor,
-                  showOnOff: false,
-                  activeTextFontWeight: FontWeight.w700,
-                  toggleColor: Colors.white,
-                  onToggle: (val) {
-                    settingController.toggleRideAssistant();
-                  },
-                )
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB( Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault,),
+            //   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
+                // Row(children: [
+                //   SizedBox(width: Dimensions.iconSizeMedium, child: Image.asset(Images.rideAssistantIcon)),
+                //   const SizedBox(width: Dimensions.paddingSizeSmall),
+                //   Text('ride_assistant'.tr)
+                // ],),
+                // FlutterSwitch(
+                //   width: 37.0,
+                //   height: 19.0,
+                //   valueFontSize: 14.0,
+                //   toggleSize: 15.0,
+                //   value: settingController.rideAssistantStatus,
+                //   borderRadius: 30.0,
+                //   padding: 2,
+                //   activeColor: Theme.of(context).primaryColor,
+                //   showOnOff: false,
+                //   activeTextFontWeight: FontWeight.w700,
+                //   toggleColor: Colors.white,
+                //   onToggle: (val) {
+                //     settingController.toggleRideAssistant();
+                //   },
+                // )
 
-              ],),
-            ),
+              // ],),
+            // ),
             Padding(
               padding: const EdgeInsets.fromLTRB( Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault,),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [

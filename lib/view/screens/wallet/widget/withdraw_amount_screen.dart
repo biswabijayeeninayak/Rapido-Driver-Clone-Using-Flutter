@@ -68,7 +68,7 @@ class _WithdrawAmountScreenState extends State<WithdrawAmountScreen> {
                             const SizedBox(width: Dimensions.paddingSizeDefault,),
                             Expanded(
                               child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: [
-                                const Text('MIT Bank'),
+                                const Text('SBI Bank'),
                                 Text('AC $acNumber',style: textRegular.copyWith(color: Theme.of(context).hintColor),),
                               ],),
                             ),
@@ -93,7 +93,7 @@ class _WithdrawAmountScreenState extends State<WithdrawAmountScreen> {
 
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('\$ ', style: textBold.copyWith(fontSize: Dimensions.fontSizeExtraLarge,
+                  Text('\₹ ', style: textBold.copyWith(fontSize: Dimensions.fontSizeExtraLarge,
                           color: Theme.of(context).primaryColor)),
                   IntrinsicWidth(
                     child: TextFormField(

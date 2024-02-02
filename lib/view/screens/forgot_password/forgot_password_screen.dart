@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import 'package:ride_sharing_user_app/view/screens/forgot_password/verification_
 import 'package:ride_sharing_user_app/view/widgets/custom_app_bar.dart';
 import 'package:ride_sharing_user_app/view/widgets/custom_button.dart';
 import 'package:ride_sharing_user_app/view/widgets/custom_text_field.dart';
+import 'package:http/http.dart' as http;
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   TextEditingController phoneController = TextEditingController();
-  String countryDialCode = CountryCode.fromCountryCode("BD").dialCode!;
+  String countryDialCode = CountryCode.fromCountryCode("IN").dialCode!;
 
   @override
   void initState() {
@@ -31,7 +34,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String countryDialCode = CountryCode.fromCountryCode("BD").dialCode!;
+    String countryDialCode = CountryCode.fromCountryCode("IN").dialCode!;
     return Scaffold(
       appBar: CustomAppBar(title: 'forget_password'.tr,showBackButton: true, regularAppbar: true,),
       body: GetBuilder<AuthController>(builder: (authController){
@@ -71,14 +74,17 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   controller: phoneController,
                   hintText: 'phone',
                   inputType: TextInputType.number,
-                  countryDialCode: "+880",
+                  countryDialCode: "+91",
                   onCountryChanged: (CountryCode countryCode) => countryDialCode = countryCode.dialCode!,
                 ),
                 const SizedBox(height: Dimensions.paddingSizeExtraLarge,),
                 CustomButton(
                   buttonText: 'send_otp'.tr,
                   onPressed: (){
-                    Get.to(()=> const VerificationScreen());
+
+                    String phoneNumber = phoneController.text;
+                    sendForgotPasswordOTP(phoneNumber);
+                    // Get.to(()=> const VerificationScreen());
                   },
                   radius: 50,
                 ),
@@ -90,4 +96,36 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       }),
     );
   }
+
+
+
+
+
+  Future<void> sendForgotPasswordOTP(String phoneNumber) async {
+  var headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  var request = http.Request('POST', Uri.parse('http://kods.tech/munsride/api/get-forgot-password-otp'));
+  request.body = json.encode({
+    "phone": phoneNumber,
+  });
+  request.headers.addAll(headers);
+
+  try {
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      print(await response.stream.bytesToString());
+      Get.to(()=> const VerificationScreen());
+    } else {
+      print(response.reasonPhrase);
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
+
+
+
 }

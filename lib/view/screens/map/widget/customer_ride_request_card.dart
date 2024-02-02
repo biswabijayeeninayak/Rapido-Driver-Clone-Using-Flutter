@@ -73,7 +73,7 @@ List<Widget> listOfRequest() {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault, vertical: Dimensions.paddingSizeDefault),
                 child: Row(children: [
-                  Expanded(child: CustomButton(buttonText: 'bid'.tr,
+                  Expanded(child: CustomButton(buttonText: 'Reject'.tr,
                     transparent: true,
                     borderWidth: 1,
                     showBorder: true,
@@ -98,7 +98,6 @@ List<Widget> listOfRequest() {
                   )),
                   ],),
               ),
-
 
             ],),);
         }

@@ -59,7 +59,7 @@ class _BiddingDialogState extends State<BiddingDialog> {
 
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
                 Text('your_bid'.tr),
-                Text('\$250',style: textSemiBold.copyWith(color: Theme.of(context).primaryColor),)
+                Text('\₹250',style: textSemiBold.copyWith(color: Theme.of(context).primaryColor),)
               ],),
 
               const SizedBox(height: Dimensions.paddingSizeDefault),

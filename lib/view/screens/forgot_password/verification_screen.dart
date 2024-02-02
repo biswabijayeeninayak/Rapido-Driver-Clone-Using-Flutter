@@ -95,6 +95,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       Get.to(()=>const ResetPasswordScreen());
 
                     },
+
                   ),
                 ) : const Center(child: CircularProgressIndicator()) : const SizedBox.shrink(),
                 const SizedBox(height: Dimensions.paddingSizeExtraLarge,),

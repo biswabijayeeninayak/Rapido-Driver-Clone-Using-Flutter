@@ -19,10 +19,10 @@ class BankInfoView extends StatelessWidget {
         body: GetBuilder<ProfileController>(
 
             builder: (profileController) {
-              String name = 'John Doe';
-              String bank = 'MIT Bank USA';
-              String branch = 'California';
-              String accountNo = 'MIT1234567890';
+              String name = 'Shreya Ghosal';
+              String bank = 'SBI Bank';
+              String branch = 'R.R Nagar,Banglore';
+              String accountNo = '1234567890';
               return Column(
                 children: [
                   GestureDetector(
